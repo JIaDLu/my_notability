@@ -58,6 +58,10 @@ npm run dev
 
 #### :racehorse:响应式数据
 
+ref()  reactive()
+
+
+
 #### :lantern:计算属性computed
 
 computed是一种特殊的属性(方法)，用于声明一个基于其他数据的计算结果。这些结果会被缓存起来，只有当其所依赖的数据发生变化，计算结果还会重新计算。
@@ -73,5 +77,108 @@ computed是一种特殊的属性(方法)，用于声明一个基于其他数据�
 ```vue
 let fullName = computed(()=>{ return firstName.value + '-' + 'lastName.value' })
 ```
+
+#### :cactus:自定义组件
+
+##### `props` 是组件之间传递数据的机制。
+
+父组件通过`props`向子组件传递数据，子组件通过声明`props`来接收这些数据。
+
+> 如何使用props 
+
+1. 在子组件中声明它期望接收的props
+
+   ```vue
+   <script>
+   props = {
+       taskPackageId: String,
+       nodeData: Object,
+       elements: Array
+   }
+   // 在这个例子中，子组件声明了三个props：taskPackageId、nodeData和elements，分别期望接收一个字符串、一个对象和一个数组。
+   </script>
+   ```
+
+2. 在父组件中传递props: 通过在子组件🉐️标签上使用`:`语法来传递`props`：
+
+   ```vue
+   <script>
+   <actionBar 
+     :taskPackageId="pageData.taskPackageId" 
+     :nodeData="selectNodePropData" 
+     :elements="elements">
+   </actionBar>
+   //这里，父组件传递了三个props：
+   //  taskPackageId绑定到pageData.taskPackageId
+   //  nodeData绑定到selectNodePropData
+   //  elements绑定到父组件中的elements变量
+   </script>
+   ```
+
+通过`props`的使用，父组件可以将数据传递给子组件，使子组件可以根据这些数据进行渲染和逻辑处理。
+
+##### 插槽
+
+- 默认插槽允许在子组件的特定位置插入父组件提供的内容，从而实现组件之间的灵活组合和内容分发
+
+> 使用：
+
+1. 在子组件(child-component.vue)中定义插槽：
+
+   ```vue
+   <template>
+     <div class="child-component">
+       <slot></slot>
+     </div>
+   </template>
+   ```
+
+2. 在父组件中使用插槽：
+
+   ```vue
+   <template>
+     <child-component>
+       <p>This is passed to the slot</p>
+     </child-component>
+   </template>
+   ```
+
+- 具名插槽：定义多个插槽并为它们命名
+
+> 使用：
+
+1. 在子组件中定义具名插槽：
+
+   ```vue
+   <template>
+     <div class="child-component">
+       <slot name="header"></slot>
+       <slot></slot>
+       <slot name="footer"></slot>
+     </div>
+   </template>
+   ```
+
+2. 在父组件中使用插槽：(v-shot可以简化为# )
+
+   ```vue
+   <template>
+     <child-component>
+       <template v-slot:header>
+         <h1>Header Content</h1>
+       </template>
+       <p>Main Content</p>
+       <template #footer>
+         <p>Footer Content</p>
+       </template>
+     </child-component>
+   </template>
+   ```
+
+#### :oden:丰富的UI组件
+
+- <el-drawer> 抽屉组件，用于创建一个从屏幕边缘滑出的面板。
+
+
 
 ## 项目
