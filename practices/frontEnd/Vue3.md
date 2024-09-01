@@ -15,7 +15,7 @@ cd project_name
 
 npm install
 
-npm run serve
+npm run serve　
 ```
 
 基于 vite 创建：轻量快速
@@ -77,6 +77,10 @@ computed是一种特殊的属性(方法)，用于声明一个基于其他数据�
 ```vue
 let fullName = computed(()=>{ return firstName.value + '-' + 'lastName.value' })
 ```
+
+#### :dart:路由
+
+
 
 #### :cactus:自定义组件
 
